@@ -7,8 +7,6 @@ pathTotalCosts = [];
         actualPoint = pointsInNeigh(i,:);
         reversePath = [actualPoint];
         
-        totalCost = computeCost(actualPoint,qstart);
-        
         % Cicla il while finché non arrivi al punto qstart
         while ~isequal(actualPoint,qstart)
 

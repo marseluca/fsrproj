@@ -1,4 +1,5 @@
 clear all
+clc
 
 % Matlab is loading the map as a struct,
 % so I need to extract the corresponding field. Otherwise:

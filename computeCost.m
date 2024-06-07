@@ -7,11 +7,9 @@ function nodeCost = computeCost(actualPoint,graph)
 
     % display("computeCost outside the while")
     
-    % Cicla il while finché non arrivi al punto qstart
-    count = 0;
-    fprintf("Looking for: [%d,%d]\n\n",actualPoint(1),actualPoint(2))
+    % % Cicla il while finché non arrivi al punto qstart
+    % fprintf("Looking for: [%d,%d]\n\n",actualPoint(1),actualPoint(2))
     while ~isequal(actualPoint,qstart)
-        count = count+1;
       
         % display("inside the while to find qstart")
 

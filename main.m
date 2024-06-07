@@ -12,12 +12,14 @@ qgoal = [135, 400];
 delta = 20;
 neighRadius = 25;
 maxIterations = 1200;
-requestedGoalDistance = 40;
+requestedGoalDistance = 20;
 
 %% Initialization
 n = 1;
 qnew = [0,0];
 graph = [qstart 0 0];
+figure
+hold on
 
 %% Algorithm
 while n<=maxIterations
@@ -97,7 +99,13 @@ while n<=maxIterations
     
     % Flag the collision
     if collision == false && goalDistance<=requestedGoalDistance
-        fprintf("Success at iteration n. %d", n)
+        graph = [graph; qgoal, qnearest];
+
+        [totalPath,goalCost] = computeGoalTrajectory(qgoal,graph);
+        fprintf("Success at iteration n. %d, with cost %d\n\n", n, goalCost)
+        disp("Goal path:")
+        % totalPath
+
         break;
     end
 
@@ -105,9 +113,6 @@ while n<=maxIterations
 
 end
 
-if collision == true || goalDistance>requestedGoalDistance
-    disp("Failure")
-end
 
 % Display the results
 for j = 1:size(points,1)
@@ -118,3 +123,14 @@ imshow(image_map_writable)
 hold on
 plot(qstart(2),qstart(1), 'ro', 'MarkerSize', 10, 'LineWidth', 2);
 plot(qgoal(2),qgoal(1), 'ro', 'MarkerSize', 10, 'LineWidth', 2);
+
+if collision == true || goalDistance>requestedGoalDistance
+    disp("Failure")
+else
+    for i=1:size(totalPath,1)-1
+        x = [totalPath(i,2), totalPath(i+1,2)];
+        y = [totalPath(i,1), totalPath(i+1,1)];
+        line(x, y, 'Color', 'r', 'LineWidth', 2);
+    end
+end
+

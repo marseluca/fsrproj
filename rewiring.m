@@ -9,18 +9,21 @@ function graph = rewiring(graph,pointsInNeigh)
         % Seleziona un punto tra quelli nel Neighborhood
         actualPoint = pointsInNeigh(i,:);
 
-        if ~isequal(actualPoint,qnear)
+        if ~isequal(actualPoint,qnear) && ~isequal(actualPoint,qnew)
             % 1. Calcola il costo di actualPoint nel graph
             nodeCost = computeCost(actualPoint,graph);
 
             % 2. Crea un nuovo graph in cui rimuovi il collegamento 
             % di actualPoint con il suo nodo precedente e lo sostituisci
             % con qnew
+            newGraph = [];
             newGraph = graph;
             for i=1:size(newGraph,1)
                 if isequal(actualPoint,newGraph(i,1:2))
-                    newGraph(i,3:4) = qnew;
-                    break;
+                    if ~isequal(newGraph(i,3:4),qstart)
+                        newGraph(i,3:4) = qnew;
+                        break;
+                    end
                 end
             end
         
@@ -31,7 +34,10 @@ function graph = rewiring(graph,pointsInNeigh)
 
             if newNodeCost<nodeCost
                 graph = newGraph;
-                disp("rewired")
+                % display("Node costs:")
+                % newNodeCost
+                % nodeCost
+                % disp("rewired")
             else
                 graph = graph;
             end

@@ -1,4 +1,4 @@
-function MinorCostPoint = getMinorCostPoint(pointsInNeigh, graph, qstart)
+function MinorCostPoint = getMinorCostPoint(pointsInNeigh, graph)
 
 pathTotalCosts = [];
 nodeCost = [];

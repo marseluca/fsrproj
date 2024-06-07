@@ -33,7 +33,7 @@ while n<=maxIterations
             pointsInNeigh = getPointsInNeighborhood(neighRadius, graph, qrand);
     end
 
-    qnear = getMinorCostPoint(pointsInNeigh, graph, qstart);
+    qnear = getMinorCostPoint(pointsInNeigh, graph);
 
     % Check the nearest configuration to qrand
     % [qnear,distance] = computeMinDistance(qrand,graph);
@@ -64,8 +64,17 @@ while n<=maxIterations
     % Check for collisions
     collision = checkCollision(image_map,points);
     
+    % Check if qnew is already present in the graph
+    isInGraph = false;
+    for i=1:size(graph,1)
+        if isequal(graph(i,1:2),qnew)
+            isInGraph = true;
+            break;
+        end
+    end
+
     % If no collisions, add qnew to the graph
-    if collision == false
+    if collision == false && isInGraph == false
         for j = 1:size(points,1) 
             image_map_writable(points(j,1),points(j,2))=0;
         end

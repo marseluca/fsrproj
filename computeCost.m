@@ -4,14 +4,23 @@ function nodeCost = computeCost(actualPoint,graph)
 
     reversePath = [actualPoint];
     qstart = graph(1,1:2);
+
+    % display("computeCost outside the while")
     
     % Cicla il while finché non arrivi al punto qstart
+    count = 0;
+    fprintf("Looking for: [%d,%d]\n\n",actualPoint(1),actualPoint(2))
     while ~isequal(actualPoint,qstart)
+        count = count+1;
+      
+        % display("inside the while to find qstart")
 
         % Trova l'indice di actualPoint nel graph
         posInGraph=1;
         while ~isequal(actualPoint,graph(posInGraph,1:2))
             posInGraph = posInGraph + 1;
+            % fprintf("inside the while to find posInGraph: %d\n",posInGraph)
+            % graph
         end
 
         % Trova il previousPoint
